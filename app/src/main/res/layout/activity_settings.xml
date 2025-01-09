@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- Back Button and Title -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_back_arrow"
+                android:contentDescription="@string/back"
+                android:id="@+id/back_button"
+                android:layout_marginEnd="0dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackgroundBorderless" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Home"
+                android:textSize="30sp"
+                android:paddingStart="0dp"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <!-- GENERAL Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GENERAL"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Notifications and Review App -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="2dp"
+        android:background="@drawable/general_background">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:background="@drawable/general_background">
+
+            <TextView
+                android:layout_width="278dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+
+                android:text="Notifications"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/switch_notifications"
+                android:thumbTint="@color/white"
+                android:trackTint="@color/track_color"
+                android:checked="true"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                android:padding="6dp"
+                tools:ignore="UseSwitchCompatOrMaterialXml" /><!-- Change the thumb color -->
+
+        </LinearLayout>
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Review App"
+            android:id="@+id/rate_app"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="20sp"
+            android:padding="12dp"
+            android:background="@drawable/ripple_button_background"
+            android:layout_marginBottom="5dp"
+            android:clickable="true"
+            android:focusable="true"
+            />
+    </LinearLayout>
+
+        <!-- SECURITY Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SECURITY"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="2dp"
+        android:background="@drawable/general_background">
+
+        <!-- Face ID and Reset PIN -->
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Reset PIN"
+            android:textColor="@android:color/holo_blue_light"
+            android:textSize="20sp"
+            android:padding="12dp"
+            android:background="@drawable/ripple_button_background"
+            android:clickable="true"
+            android:focusable="true"
+            android:id="@+id/reset_pin" />
+    </LinearLayout>
+
+        <!-- RESET Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RESET"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="2dp"
+        android:background="@drawable/general_background">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Reset App"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="20sp"
+            android:padding="12dp"
+            android:id="@+id/reset_app"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"/>
+    </LinearLayout>
+
+        <!-- SOCIALS Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CONTACT"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="2dp"
+            android:background="@drawable/general_background">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Instagram"
+                android:textColor="@android:color/holo_blue_light"
+                android:textSize="20sp"
+                android:padding="12dp"
+                android:background="@drawable/ripple_button_background"
+                android:id="@+id/instagram"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Website"
+                android:textColor="@android:color/holo_blue_light"
+                android:textSize="20sp"
+                android:padding="12dp"
+                android:background="@drawable/ripple_button_background"
+                android:id="@+id/website"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:textColor="@android:color/holo_blue_light"
+                android:textSize="20sp"
+                android:padding="12dp"
+                android:background="@drawable/ripple_button_background"
+                android:id="@+id/email"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LICENSES"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="2dp"
+            android:background="@drawable/general_background">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Third Party Licenses"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:padding="12dp"
+                android:background="@drawable/ripple_button_background"
+                android:id="@+id/license"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"/>
+
+
+        </LinearLayout>
+
+        <!-- Version Info -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Version 0.1 (Beta)"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:layout_marginTop="60dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Made by MasterBros Developers, Andrew"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:layout_marginBottom="24dp" />
+
+
+    </LinearLayout>
+
+</ScrollView>

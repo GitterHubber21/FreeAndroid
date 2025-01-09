@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="24dp"
+    android:background="@color/black">
+
+    <!-- Top Text -->
+    <TextView
+        android:id="@+id/text_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="What do you want to stop doing?"
+        android:textColor="@android:color/white"
+        android:textSize="26sp"
+        android:gravity="center"
+        android:layout_marginTop="40dp"
+         />
+
+    <!-- Addiction Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="60dp">
+
+
+
+        <!-- Addiction 2 -->
+        <Button
+            android:id="@+id/button_overeating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🍔 Overeating"
+            android:background="@drawable/button_gradient"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="12dp"
+            android:elevation="4dp"
+            android:padding="16dp" />
+
+        <!-- Addiction 3 -->
+        <Button
+            android:id="@+id/button_smoking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🚬 Smoking"
+            android:background="@drawable/button_gradient"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="12dp"
+            android:elevation="4dp"
+            android:padding="16dp" />
+
+        <!-- Addiction 4 -->
+        <Button
+            android:id="@+id/button_social_media"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📱 Social Media"
+            android:background="@drawable/button_gradient"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="12dp"
+            android:elevation="4dp"
+            android:padding="16dp" />
+
+        <!-- Addiction 5 -->
+        <Button
+            android:id="@+id/button_alcohol"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🍺 Alcohol"
+            android:background="@drawable/button_gradient"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="12dp"
+            android:elevation="4dp"
+            android:padding="16dp" />
+    </LinearLayout>
+
+    <!-- Custom Addiction Input -->
+    <EditText
+        android:id="@+id/custom_addiction_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter your own "
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/darker_gray"
+        android:background="@drawable/edittext_rounded"
+        android:padding="16dp"
+        android:layout_marginBottom="24dp"
+        android:inputType="text" />
+</LinearLayout>
+    <!-- Submit Button -->
+    <Button
+        android:id="@+id/button_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:background="@drawable/submit_button_gradient"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginEnd="120dp"/>
+</FrameLayout>
+

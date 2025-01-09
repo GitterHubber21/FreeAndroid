@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    tools:context=".MainActivity">
+
+    <!-- Large White "Home" Text -->
+    <RelativeLayout
+        android:id="@+id/top_of_the_screen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <!-- Large White "Home" Text -->
+        <TextView
+            android:id="@+id/homeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+
+            android:text="Home"
+            android:textColor="@android:color/white"
+            android:textSize="44sp"
+            android:layout_alignParentStart="true" />
+
+        <!-- Calendar View (GridLayout) -->
+        <ImageView
+            android:id="@+id/gearIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/gear_icon"
+            android:layout_alignBottom="@id/homeText" />
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/addictionChoose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_below="@id/top_of_the_screen"
+        android:layout_marginBottom="6dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:background="@drawable/text_frame">
+
+    <Button
+        android:id="@+id/switch_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="Select Addiction"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:layout_gravity="center_vertical" /> <!-- Vertically centers the button -->
+
+    <ImageView
+        android:id="@+id/bars"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bars"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_gravity="center_vertical" /> <!-- Vertically centers the image -->
+</LinearLayout>
+
+
+
+
+
+<GridLayout
+        android:id="@+id/calendarGrid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="115dp"
+        android:layout_centerHorizontal="true"
+        android:columnCount="7"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+        <!-- Days will be added dynamically -->
+    </GridLayout>
+
+    <LinearLayout
+        android:id="@+id/monthNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_above="@id/streakText"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_vertical">
+
+        <!-- Left Arrow Button -->
+        <ImageView
+            android:id="@+id/button_prevMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:src="@drawable/month_left"
+            android:clickable="true"
+            android:focusable="true"
+            android:backgroundTint="@android:color/black" />
+
+        <!-- Month Text -->
+        <TextView
+            android:id="@+id/currentMonthText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="October"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="3dp"/>
+
+        <!-- Right Arrow Button -->
+        <ImageView
+            android:id="@+id/button_nextMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:src="@drawable/month_right"
+            android:clickable="true"
+            android:focusable="true"
+            android:backgroundTint="@android:color/black" />
+    </LinearLayout>
+
+    <!-- Streak Counter -->
+    <TextView
+        android:id="@+id/streakText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/buttonContainer"
+        android:layout_marginBottom="135dp"
+        android:background="@drawable/text_frame"
+        android:gravity="center"
+        android:padding="14dp"
+        android:text="@string/you_have_no_streak_yet"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp" />
+
+    <!-- Motivational Question -->
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/motivation_question"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:background="@drawable/question_background"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/buttonContainer"
+        android:layout_marginBottom="70dp"
+        android:padding="14dp"
+        android:gravity="center" />
+
+
+
+    <LinearLayout
+        android:id="@+id/buttonContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="2dp">
+
+        <Button
+            android:id="@+id/button_okay"
+            android:layout_width="180dp"
+            android:layout_height="50dp"
+            android:background="@drawable/okay_button"
+            android:text="@string/i_m_still_okay"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/button_failed"
+            android:layout_width="180dp"
+            android:layout_height="50dp"
+            android:background="@drawable/fail_button"
+            android:text="@string/i_failed"
+            android:textColor="@android:color/white"
+            android:layout_marginStart="10dp" />
+    </LinearLayout>
+
+</RelativeLayout>
+
+
+
+
+
+
