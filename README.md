@@ -56,7 +56,7 @@ The **Free** app is a powerful yet simple tool designed to help you track and ov
 ![Screenshot_20250109_180429_Free](https://github.com/user-attachments/assets/cea8b319-b824-424d-ad1a-38d94d49ef29)
 ---
 ## Installation
-Download the APK via the link: https://github.com/GitterHubber21/AndroidAppFree/releases/latest
+Download the APK via the link: https://github.com/GitterHubber21/FreeAndroid/releases/latest
 
 ---
 
