@@ -33,7 +33,6 @@ import org.json.JSONObject
 import java.util.Calendar
 import java.util.Locale
 
-//MIT license!!
 
 class MainActivity : AppCompatActivity() {
 
