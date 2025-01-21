@@ -1,3 +1,6 @@
+//I wrote the MainActivity's code here for a long time, then switched it up, because it's more logical to have the MainActivity as the main flow. 
+//So that is why there are so many hours logged in this file.
+
 package com.example.free
 
 import android.content.Intent
