@@ -2,7 +2,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <solid android:color="#64cd11" />
 
-    <corners android:radius="100dp" /> <!-- Large radius ensures a circle -->
+    <corners android:radius="100dp" />
 </shape>
 
 

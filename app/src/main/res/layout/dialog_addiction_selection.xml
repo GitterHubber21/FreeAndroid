@@ -14,13 +14,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingTop="8dp"
-        android:background="@android:color/transparent"> <!-- Rounded corners -->
-
-        <!-- Items will be populated programmatically -->
-
+        android:background="@android:color/transparent">
     </LinearLayout>
 
-    <!-- Button to add new addiction -->
+
     <Button
         android:id="@+id/addNewAddictionButton"
         android:layout_width="match_parent"

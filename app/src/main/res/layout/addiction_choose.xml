@@ -12,7 +12,7 @@
     android:padding="24dp"
     android:background="@color/black">
 
-    <!-- Top Text -->
+
     <TextView
         android:id="@+id/text_question"
         android:layout_width="wrap_content"
@@ -24,7 +24,7 @@
         android:layout_marginTop="40dp"
          />
 
-    <!-- Addiction Buttons -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,9 +32,6 @@
         android:layout_marginBottom="24dp"
         android:layout_marginTop="60dp">
 
-
-
-        <!-- Addiction 2 -->
         <Button
             android:id="@+id/button_overeating"
             android:layout_width="match_parent"
@@ -46,7 +43,6 @@
             android:elevation="4dp"
             android:padding="16dp" />
 
-        <!-- Addiction 3 -->
         <Button
             android:id="@+id/button_smoking"
             android:layout_width="match_parent"
@@ -58,7 +54,6 @@
             android:elevation="4dp"
             android:padding="16dp" />
 
-        <!-- Addiction 4 -->
         <Button
             android:id="@+id/button_social_media"
             android:layout_width="match_parent"
@@ -70,7 +65,6 @@
             android:elevation="4dp"
             android:padding="16dp" />
 
-        <!-- Addiction 5 -->
         <Button
             android:id="@+id/button_alcohol"
             android:layout_width="match_parent"
@@ -83,7 +77,7 @@
             android:padding="16dp" />
     </LinearLayout>
 
-    <!-- Custom Addiction Input -->
+
     <EditText
         android:id="@+id/custom_addiction_input"
         android:layout_width="match_parent"
@@ -96,7 +90,7 @@
         android:layout_marginBottom="24dp"
         android:inputType="text" />
 </LinearLayout>
-    <!-- Submit Button -->
+
     <Button
         android:id="@+id/button_submit"
         android:layout_width="match_parent"

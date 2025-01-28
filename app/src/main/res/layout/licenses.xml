@@ -17,7 +17,7 @@
         android:background="?attr/selectableItemBackgroundBorderless"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
-    <!-- Header Text -->
+
     <TextView
         android:id="@+id/header_text"
         android:layout_width="0dp"
@@ -32,7 +32,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- License Text -->
     <TextView
         android:id="@+id/heroicons_license"
         android:layout_width="0dp"

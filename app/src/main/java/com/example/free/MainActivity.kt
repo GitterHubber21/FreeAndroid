@@ -67,21 +67,19 @@ class MainActivity : AppCompatActivity() {
         scheduleHourlyReminder()
         scheduleDailyWrapUpReminder()
 
-
-        // Initialize shared preferences
         sharedPreferences = getSharedPreferences("app_prefs", MODE_PRIVATE)
 
-        // Check if the user has completed onboarding
+
         val onboardingCompleted = sharedPreferences.getBoolean("onboarding_completed", false)
-        // Check if the user has set up a PIN
+
         val isPinSetupComplete = sharedPreferences.getBoolean("pin_setup_complete", false)
         val addictionChoiceComplete = sharedPreferences.getBoolean("addiction_choice_complete", false)
-        // Check if the user has already been authenticated for this session
+
         val isAuthenticated = sharedPreferences.getBoolean("is_authenticated", false)
         val resetting = sharedPreferences.getBoolean("resetting", false)
         vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
 
-        // Flow 1: Redirect to onboarding if it's not completed
+
         if (!onboardingCompleted) {
             val intent = Intent(this, OnboardingActivity::class.java)
             startActivity(intent)
@@ -89,7 +87,7 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        // Flow 2: After onboarding, check if the PIN is set up
+
         if (!isPinSetupComplete&&!resetting) {
             val intent = Intent(this, PinActivity::class.java)
             startActivity(intent)
@@ -103,8 +101,6 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-
-        // Flow 3: If PIN is set but not authenticated yet, go to PinVerificationActivity
         if (isPinSetupComplete && !isAuthenticated&&addictionChoiceComplete) {
             val intent = Intent(this, PinVerificationActivity::class.java)
             startActivity(intent)
@@ -112,13 +108,13 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        // Flow 4: If everything is done, show the main calendar
-        setContentView(R.layout.activity_main) // Inflate the layout
 
-        // Now we can initialize the settings button properly
+        setContentView(R.layout.activity_main)
+
+
         settingsButton = findViewById(R.id.gearIcon)
 
-        // Initialize other views
+
         calendarGrid = findViewById(R.id.calendarGrid)
         streakText = findViewById(R.id.streakText)
         buttonOkay = findViewById(R.id.button_okay)
@@ -129,7 +125,7 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        // Set button click listeners
+
         buttonOkay.setOnClickListener {
             handleButtonClick(success = true)
             if(!buttonOkay.isEnabled){
@@ -144,47 +140,42 @@ class MainActivity : AppCompatActivity() {
 
 
         settingsButton.setOnClickListener {
-            // Start the SettingsActivity
+
             val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
         }
 
 
-
-        // Get the current day
         val calendar = Calendar.getInstance()
-        val daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
         currentDay = calendar.get(Calendar.DAY_OF_MONTH)
-        val startDayOffset = calendar.get(Calendar.DAY_OF_WEEK) - Calendar.MONDAY
 
-        // Retrieve the streak count and saved state from SharedPreferences
+
+
         streakCounter = sharedPreferences.getInt("streak_counter", 0)
 
         updateStreakText(streakCounter)
 
-        // Populate calendar
+
         populateCalendarForCurrentMonth()
         loadStreakForAddiction()
-
-        // Set button click listeners
 
         if(resetting){
             resetApp()
         }
         monthTextView = findViewById(R.id.currentMonthText)
 
-        // Get the current month and year
 
-        currentMonth = calendar.get(Calendar.MONTH) // 0 for January, 11 for December
+
+        currentMonth = calendar.get(Calendar.MONTH)
         currentYear = calendar.get(Calendar.YEAR)
 
-        // Set the month text
+
         updateMonthText()
 
-        // Populate calendar
+
         populateCalendarForCurrentMonth()
 
-        // Set up navigation arrow listeners
+
         findViewById<ImageView>(R.id.button_prevMonth).setOnClickListener {
             navigateToPreviousMonth()
         }
@@ -196,9 +187,6 @@ class MainActivity : AppCompatActivity() {
         windowManager.defaultDisplay.getMetrics(displayMetrics)
         val screenWidth = displayMetrics.widthPixels
 
-// Set the width to 5% of the screen width
-
-// Set the width to 5% of the screen width
         val textViewWidth = (screenWidth * 0.4375).toInt()
         buttonOkay.layoutParams.width = textViewWidth
         buttonOkay.requestLayout()
@@ -211,11 +199,11 @@ class MainActivity : AppCompatActivity() {
         SwitchButton = findViewById(R.id.switch_button)
         Bars=findViewById(R.id.bars)
 
-        // Set the text of SwitchButton to addictionValue
+
         val addictionValue = sharedPreferences.getString("addiction", "Select Addiction") ?: "Select Addiction"
         SwitchButton.text = addictionValue
 
-        // Set up the click listener for SwitchButton
+
         SwitchButton.setOnClickListener {
             showAddictionSelectionDialog()
         }
@@ -223,15 +211,13 @@ class MainActivity : AppCompatActivity() {
             showAddictionSelectionDialog()
         }
 
-
-        // Calendar initialization logic...
         populateCalendarForCurrentMonth()
 
     }
 
     inner class SwipeGestureListener : GestureDetector.SimpleOnGestureListener() {
-        private val SWIPE_THRESHOLD = 100 // Minimum distance to consider it a swipe
-        private val SWIPE_VELOCITY_THRESHOLD = 100 // Minimum velocity for the swipe
+        private val SWIPE_THRESHOLD = 100
+        private val SWIPE_VELOCITY_THRESHOLD = 100
 
         override fun onFling(
             e1: MotionEvent?,
@@ -243,13 +229,11 @@ class MainActivity : AppCompatActivity() {
                 val diffX = e2!!.x - e1!!.x
                 val diffY = e2.y - e1.y
                 if (Math.abs(diffX) > Math.abs(diffY)) {
-                    // Horizontal swipe detected
+
                     if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
                         if (diffX > 0) {
-                            // Swipe right (previous month)
                             navigateToPreviousMonth()
                         } else {
-                            // Swipe left (next month)
                             navigateToNextMonth()
                         }
                         return true
@@ -264,7 +248,6 @@ class MainActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
 
-        // Reset is_authenticated to false when the app is stopped (background or closed)
         sharedPreferences.edit().apply {
             putBoolean("is_authenticated", false)
             putBoolean("resetting", false)
@@ -272,7 +255,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Function to populate the calendar grid with days
     private fun populateCalendarForCurrentMonth() {
         calendarGrid.removeAllViews()
         addDayNames()
@@ -331,7 +313,6 @@ class MainActivity : AppCompatActivity() {
             calendarGrid.addView(dayView)
         }
 
-        // Enable or disable buttons based on the conditions
         if (currentMonth == Calendar.getInstance().get(Calendar.MONTH) &&
             currentYear == Calendar.getInstance().get(Calendar.YEAR)
         ) {
@@ -347,58 +328,46 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-
-
-
-    // Function to add day names to the calendar grid
     private fun addDayNames() {
-        // Array of day names
+
         val displayMetrics = resources.displayMetrics
         val screenWidth = displayMetrics.widthPixels
         val dayNames = arrayOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
         val dayNameSize = (screenWidth * 0.1167).toInt()
 
-        // Loop through the day names and create TextViews
+
         for (i in dayNames.indices) {
             val dayNameView = TextView(this)
             dayNameView.text = dayNames[i]
             dayNameView.gravity = Gravity.CENTER
             dayNameView.setTextColor(Color.WHITE)
 
-            // Set text size to 24sp for better visibility
+
             dayNameView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)
 
-            // Create layout params and set column for day names
+
             val params = GridLayout.LayoutParams()
-            params.columnSpec = GridLayout.spec(i) // Set the correct column
-            params.rowSpec = GridLayout.spec(0) // All day names in the first row
-            params.width = dayNameSize // Set width to be based on screen width
-            params.height = dayNameSize // Set height to match width for uniformity
+            params.columnSpec = GridLayout.spec(i)
+            params.rowSpec = GridLayout.spec(0)
+            params.width = dayNameSize
+            params.height = dayNameSize
             params.setMargins(4, 4, 4, 4)
 
-            // Apply layout params and add the view to the grid
             dayNameView.layoutParams = params
             calendarGrid.addView(dayNameView)
         }
     }
 
 
-
-
-
-
-
-    // Function to handle button clicks for "I'm still okay" or "I failed"
     private fun handleButtonClick(success: Boolean) {
         if (!currentDayPressed && ::currentDayView.isInitialized) {
             val dayStatus = if (success) "Success" else "Failure"
             val dateKey = getDateKey(currentDay, currentMonth, currentYear, selectedAddiction)
-// Retrieve the current status JSON from SharedPreferences
+
             val statusJson = sharedPreferences.getString("${selectedAddiction}_status", "{}")
             val statusMap = mutableMapOf<String, String>()
 
-            // Parse the JSON into a Map
+
             try {
                 val jsonObject = JSONObject(statusJson ?: "{}")
                 jsonObject.keys().forEach { key ->
@@ -408,28 +377,27 @@ class MainActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
 
-            // Update the status for the current day
             statusMap[dateKey] = dayStatus
 
-            // Convert the Map back to a JSON String
+
             val updatedJsonObject = JSONObject()
             statusMap.forEach { (key, value) ->
                 updatedJsonObject.put(key, value)
             }
 
-            // Save the updated JSON string back to SharedPreferences
+
             sharedPreferences.edit().apply {
                 putString("${selectedAddiction}_status", updatedJsonObject.toString())
                 apply()
             }
-            // Save day status
+
             sharedPreferences.edit().apply {
                 putString("${selectedAddiction}_status_$dateKey", dayStatus)
                 apply()
             }
 
             if (success) {
-                // Retrieve the last logged date
+
                 val lastSuccessDate = sharedPreferences.getString("${selectedAddiction}_last_success_date", null)
 
                 val calendar = Calendar.getInstance().apply {
@@ -452,33 +420,29 @@ class MainActivity : AppCompatActivity() {
                             calendar.get(Calendar.DAY_OF_YEAR) == 1 &&
                             lastSuccessCalendar.get(Calendar.DAY_OF_YEAR) == lastSuccessCalendar.getActualMaximum(Calendar.DAY_OF_YEAR)
 
-                    // Check if the current day is consecutive to the last logged day
                     if (isNextDayInSameYear || isNextDayInNewYear) {
-                        streakCounter++ // Continue streak
+                        streakCounter++
                     } else {
-                        streakCounter = 1 // Reset streak
+                        streakCounter = 1
                     }
                 } else {
-                    streakCounter = 1 // Start streak
+                    streakCounter = 1
                 }
 
-                // Save the updated last success date
                 sharedPreferences.edit().apply {
                     putString("${selectedAddiction}_last_success_date", SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(currentDate))
                     apply()
                 }
             } else {
-                streakCounter = 0 // Reset streak on failure
+                streakCounter = 0
                 disableButtons()
             }
 
-            // Save updated streak
             sharedPreferences.edit().apply {
                 putInt(getStreakKey(selectedAddiction), streakCounter)
                 apply()
             }
 
-            // Update UI
             updateStreakText(streakCounter)
             if (success) {
                 currentDayView.setBackgroundResource(R.drawable.success_day_background)
@@ -495,10 +459,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-
-
-    // Function to update the streak counter text
     private fun updateStreakText(streak: Int) {
         if (streak > 0) {
             streakText.text = "Your current streak is $streak day."
@@ -507,7 +467,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Function to disable buttons after marking the day
     private fun enableButtons() {
         val dateKey = getDateKey(currentDay, currentMonth, currentYear, selectedAddiction)
         val dayStatus = sharedPreferences.getString("${selectedAddiction}_status_$dateKey", "neutral")
@@ -522,17 +481,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun resetApp() {
-        // Clear SharedPreferences to reset saved data
         with(sharedPreferences.edit()) {
             clear()
             apply()
         }
 
-        // Reset UI components (calendar background, streak text, and buttons)
         streakCounter = 0
         streakText.text = "You have no streak yet."
 
-        // Reset calendar day backgrounds
         for (i in 0 until calendarGrid.childCount) {
             val dayView = calendarGrid.getChildAt(i) as TextView
             if (i + 1 == currentDay) {
@@ -543,7 +499,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Enable buttons again
         buttonOkay.isEnabled = true
         buttonFailed.isEnabled = true
         sharedPreferences.edit().apply {
@@ -561,12 +516,12 @@ class MainActivity : AppCompatActivity() {
     private fun vibratePhone() {
 
         if (vibrator.hasVibrator()) {
-            // For devices with API 26+ (Android 8.0), use VibrationEffect
+
             val vibrationEffect = VibrationEffect.createOneShot(100, 30)
             vibrator.vibrate(vibrationEffect)
         } else {
-            // For devices with older APIs, use the deprecated vibrate method
-            vibrator.vibrate(100) // Vibrates for 500 milliseconds
+
+            vibrator.vibrate(100)
         }
     }
     private val monthsArray = arrayOf(
@@ -596,10 +551,9 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun updateMonthText() {
-        // Fetch the month name from the array
+
         val monthName = monthsArray[currentMonth]
 
-        // Update the month text to include the year
         monthTextView.text = "$monthName $currentYear"
     }
 
@@ -609,40 +563,32 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showAddictionSelectionDialog() {
-        // List of addictions with their corresponding emojis
 
-
-        // Retrieve the list of addictions from SharedPreferences (as a Set of Strings)
         val addictionSet = sharedPreferences.getStringSet("addictions", null) ?: emptySet()
 
-        // Convert the Set<String> to a list of Addiction objects
+
         val addictionNames = addictionSet.toMutableList()
 
-        // Retrieve the addiction stored in SharedPreferences (user's selected addiction)
         val storedAddiction = sharedPreferences.getString("addiction", null)
 
-        // If the stored addiction is not null and not already in the list, add it
         if (storedAddiction != null && !addictionNames.contains(storedAddiction)) {
             addictionNames.add(storedAddiction)
-            saveAddictionsToSharedPreferences(addictionNames)  // Save the updated list
+            saveAddictionsToSharedPreferences(addictionNames)
         }
 
-        // Inflate the custom layout for the dialog
         val dialogView = layoutInflater.inflate(R.layout.dialog_addiction_selection, null)
 
-        // Set up the LinearLayout in the dialog layout
+
         val addictionListLayout: LinearLayout = dialogView.findViewById(R.id.addictionListLayout)
 
-        // Create the Dialog instance
         val dialog = Dialog(this, R.style.TransparentDialog)
         dialog.setContentView(dialogView)
-        dialog.setCancelable(true) // Allow dismissing the dialog when clicked outside
+        dialog.setCancelable(true)
         val params = dialog.window?.attributes
-        params?.width = WindowManager.LayoutParams.MATCH_PARENT // Full width
-        params?.gravity = Gravity.BOTTOM // Positioned at the bottom of the screen
+        params?.width = WindowManager.LayoutParams.MATCH_PARENT
+        params?.gravity = Gravity.BOTTOM
         dialog.window?.attributes = params
 
-        // Add each addiction item to the layout
         addictionNames.forEach { addictionName ->
             val textView = TextView(this).apply {
                 text = addictionName
@@ -656,50 +602,41 @@ class MainActivity : AppCompatActivity() {
                 )
             }
 
-            // Set an OnClickListener for each item
             textView.setOnClickListener {
-                // Handle the selection logic here
                 SwitchButton.text = addictionName
                 sharedPreferences.edit().apply {
                     putString("addiction", addictionName)
                     apply()
                 }
 
-                // Notify the user of the selection
-                // Update the calendar for the selected addiction
                 loadStreakForAddiction()
 
-                // Dismiss the dialog
+
                 dialog.dismiss()
             }
 
-            // Add the item to the layout
+
             addictionListLayout.addView(textView)
         }
 
-        // Find the "Add New Addiction" button and set an OnClickListener
         val addNewAddictionButton: Button = dialogView.findViewById(R.id.addNewAddictionButton)
         addNewAddictionButton.setOnClickListener {
-            // Start AddictionActivity when the "Add new Addiction" button is clicked
             val intent = Intent(this, AddictionActivity::class.java)
             startActivity(intent)
         }
 
-        // Show the dialog
         dialog.show()
     }
 
 
-    // Function to save the addiction list back to SharedPreferences (as a Set of Strings)
+
     private fun saveAddictionsToSharedPreferences(addictions: List<String>) {
-        val addictionSet = addictions.toSet() // Convert List to Set to avoid duplicates
+        val addictionSet = addictions.toSet()
         sharedPreferences.edit().apply {
             putStringSet("addictions", addictionSet)
             apply()
         }
     }
-
-
 
     private fun getStreakKey(addiction: String): String {
         return "streak_$addiction"
@@ -717,7 +654,6 @@ class MainActivity : AppCompatActivity() {
         val channel = NotificationChannel("progress_reminder", name, importance).apply {
             description = descriptionText
         }
-        // Register the channel with the system
         val notificationManager: NotificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.createNotificationChannel(channel)
@@ -732,8 +668,7 @@ class MainActivity : AppCompatActivity() {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
-        // Set the alarm to trigger every hour
-        val interval = 7200 * 1000L  // 1 minute in milliseconds
+        val interval = 7200 * 1000L
         val triggerTime = System.currentTimeMillis() + interval
 
         alarmManager.setRepeating(
@@ -748,12 +683,11 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, DailyWrapUpReceiver::class.java)
         val pendingIntent = PendingIntent.getBroadcast(
             this,
-            1, // Unique request code for wrap-up notification
+            1,
             intent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
-        // Set the alarm for 8:30 PM
         val calendar = Calendar.getInstance().apply {
             timeInMillis = System.currentTimeMillis()
             set(Calendar.HOUR_OF_DAY, 20)
@@ -774,7 +708,6 @@ class ProgressReminderReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
         if (currentHour < 10 || currentHour > 20) {
-            // Do not send a notification outside the 10 AM to 8 PM range
             return
         }
         val notificationIntent = Intent(context, MainActivity::class.java)
@@ -857,7 +790,7 @@ class ProgressReminderReceiver : BroadcastReceiver() {
         )
         val randomMessage = messages.random()
         val notification = NotificationCompat.Builder(context, "progress_reminder")
-            .setSmallIcon(R.mipmap.ic_launcher_round) // Replace with your app's icon
+            .setSmallIcon(R.mipmap.ic_launcher_round)
             .setContentTitle("You got this!")
             .setContentText(randomMessage)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
@@ -872,28 +805,26 @@ class ProgressReminderReceiver : BroadcastReceiver() {
 }
 class DailyWrapUpReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
-        // Retrieve the tracked addictions from SharedPreferences
+
         val sharedPreferences = context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit() // Get the editor for clearing values
+        val editor = sharedPreferences.edit()
         val addictionSet = sharedPreferences.getStringSet("addictions", null) ?: emptySet()
 
-        // Build the summary message
         val summary = addictionSet.joinToString(separator = "\n") { addiction ->
             val logStatusKey = "${addiction}_status"
             val logStatus = sharedPreferences.getString(logStatusKey, "No log") ?: "No log"
-            val statusMatch = Regex(":\\s*\"?(.*?)\"?\\}").find(logStatus) // Extract between ":" and "}" without quotes
-            val status = statusMatch?.groupValues?.get(1) ?: "No log" // Extract and handle missing data
+            val statusMatch = Regex(":\\s*\"?(.*?)\"?\\}").find(logStatus)
+            val status = statusMatch?.groupValues?.get(1) ?: "No log"
 
-            // Clear the value for the current addiction's status
             editor.remove(logStatusKey)
 
             "$addiction: $status"
         }
 
-        // Apply the changes to SharedPreferences
+
         editor.apply()
 
-        // Create the notification
+
         val notificationIntent = Intent(context, MainActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(
             context,
@@ -903,7 +834,7 @@ class DailyWrapUpReceiver : BroadcastReceiver() {
         )
 
         val notification = NotificationCompat.Builder(context, "progress_reminder")
-            .setSmallIcon(R.mipmap.ic_launcher_round) // Replace with your app's icon
+            .setSmallIcon(R.mipmap.ic_launcher_round)
             .setContentTitle("Daily Wrap-Up")
             .setContentText("Here's how you did today!")
             .setStyle(NotificationCompat.BigTextStyle().bigText(summary))

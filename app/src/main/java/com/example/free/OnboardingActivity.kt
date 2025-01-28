@@ -23,12 +23,11 @@ class OnboardingActivity : AppCompatActivity() {
         buttonNext = findViewById(R.id.button_next)
 
         buttonNext.setOnClickListener {
-            // Set a flag that the user has completed onboarding
+
             val editor = sharedPreferences.edit()
             editor.putBoolean("onboarding_completed", true)
             editor.apply()
 
-            // Redirect to the PIN setup screen (PinActivity)
             val intent = Intent(this, PinActivity::class.java)
             startActivity(intent)
 

@@ -25,7 +25,6 @@ class PinResetVerification : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pin_verify_reset)
 
-        // Initialize EditTexts and Button
         pinInput1 = findViewById(R.id.pin_input1)
         pinInput2 = findViewById(R.id.pin_input2)
         pinInput3 = findViewById(R.id.pin_input3)
@@ -34,10 +33,10 @@ class PinResetVerification : AppCompatActivity() {
         pinInput6 = findViewById(R.id.pin_input6)
         submitButton = findViewById(R.id.pin_submit)
         setEditTextDimensions()
-        // Initialize SharedPreferences
+
         sharedPreferences = getSharedPreferences("app_prefs", MODE_PRIVATE)
 
-        // Set up the text watchers for each EditText
+
         pinInput1.addTextChangedListener(PINTextWatcher(pinInput1, pinInput2, null))
         pinInput2.addTextChangedListener(PINTextWatcher(pinInput2, pinInput3, pinInput1))
         pinInput3.addTextChangedListener(PINTextWatcher(pinInput3, pinInput4, pinInput2))
@@ -51,10 +50,10 @@ class PinResetVerification : AppCompatActivity() {
             val enteredPin = "${pinInput1.text}${pinInput2.text}${pinInput3.text}${pinInput4.text}${pinInput5.text}${pinInput6.text}"
             if (enteredPin.length==6){
                 if (enteredPin == storedPin) {
-                    // Mark the user as authenticated for this session
+
 
                     Toast.makeText(this, "Successful verification", Toast.LENGTH_SHORT).show()
-                    // Redirect to MainActivity (the home screen)
+
                     sharedPreferences.edit().apply {
 
 
@@ -64,7 +63,7 @@ class PinResetVerification : AppCompatActivity() {
                     }
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
-                    finish() // Close this activity
+                    finish()
                 }else{
                     Toast.makeText(this, "Incorrect PIN, please try again.", Toast.LENGTH_SHORT).show()
                     pinInput1.setText("")
@@ -90,19 +89,15 @@ class PinResetVerification : AppCompatActivity() {
         }
     }
     private fun setEditTextDimensions() {
-        // Get the display metrics
+
         val metrics = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(metrics)
-
-        // Calculate size for EditText (11.67% of the screen width)
-        val size = metrics.widthPixels * 0.1167 // This is the size for both width and height
-
-        // Set the dimensions for each EditText
+        val size = metrics.widthPixels * 0.1167
         for (editText in listOf(pinInput1, pinInput2, pinInput3, pinInput4, pinInput5, pinInput6)) {
             val layoutParams = editText.layoutParams
-            layoutParams.width = size.toInt() // Set width
-            layoutParams.height = size.toInt() // Set height to be equal to width
-            editText.layoutParams = layoutParams // Apply updated layout params
+            layoutParams.width = size.toInt()
+            layoutParams.height = size.toInt()
+            editText.layoutParams = layoutParams
         }
     }
 }

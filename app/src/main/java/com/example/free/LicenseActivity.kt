@@ -16,20 +16,20 @@ class LicenseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.licenses) // Make sure the layout XML is named correctly
+        setContentView(R.layout.licenses)
 
-        // Initialize views
+
         backButton = findViewById(R.id.back_button)
         link = findViewById(R.id.link)
 
-        // Set up click listener for backButton
+
         backButton.setOnClickListener {
-            finish() // This finishes the activity when the back button is clicked
+            finish()
         }
 
-        // Set up click listener for link
+
         link.setOnClickListener {
-            // Open the URL in a web browser
+
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/tailwindlabs/heroicons"))
             startActivity(intent)
         }

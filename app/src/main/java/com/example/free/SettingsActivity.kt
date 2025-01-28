@@ -36,17 +36,14 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var confirmButton: Button
     private lateinit var switch_button: Switch
     private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var notificationManager: NotificationManager  // Add this to handle notifications
+    private lateinit var notificationManager: NotificationManager
     private lateinit var licenseButton : TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPreferences = getSharedPreferences("app_prefs", MODE_PRIVATE)
-
         setContentView(R.layout.activity_settings)
-
-        // Find views by ID
         backButton = findViewById(R.id.back_button)
         resetApp = findViewById(R.id.reset_app)
         instagram = findViewById(R.id.instagram)
@@ -87,16 +84,14 @@ class SettingsActivity : AppCompatActivity() {
             val intent = Intent(Intent.ACTION_SENDTO).apply {
                 data = Uri.parse("mailto:contact@masterbros.dev")
             }
-            // Check if an email app is available before starting the activity
+
             startActivity(intent)
         }
 
-
-        // Set switch to its saved state
         val switchState = sharedPreferences.getBoolean("switch_state", true)
         switch_button.isChecked = switchState
 
-        // Enable/Disable notifications based on saved state
+
         if (switchState) {
             enableNotifications2()
             scheduleDailyWrapUpReminder()
@@ -105,14 +100,14 @@ class SettingsActivity : AppCompatActivity() {
             cancelDailyWrapup()
         }
 
-        // Handle switch state change
+
         switch_button.setOnCheckedChangeListener { _, isChecked ->
             sharedPreferences.edit().apply {
                 putBoolean("switch_state", isChecked)
                 apply()
             }
 
-            // Enable or disable notifications based on the switch state
+
             if (isChecked) {
                 enableNotifications()
                 scheduleDailyWrapUpReminder()
@@ -121,8 +116,6 @@ class SettingsActivity : AppCompatActivity() {
                 cancelDailyWrapup()
             }
         }
-
-        // Other button actions...
 
         resetApp.setOnClickListener {
             showConfirmationDialog()
@@ -134,36 +127,22 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun enableNotifications() {
-        // Create notification channel if not already created
         createNotificationChannel()
-
-        // Schedule hourly reminder if switch is turned on
         scheduleHourlyReminder()
-
         Toast.makeText(this, "Notifications enabled", Toast.LENGTH_SHORT).show()
     }
 
     private fun disableNotifications() {
-        // Cancel scheduled notifications if switch is turned off
         cancelHourlyReminder()
-
         Toast.makeText(this, "Notifications disabled", Toast.LENGTH_SHORT).show()
     }
     private fun enableNotifications2() {
-        // Create notification channel if not already created
         createNotificationChannel()
-
-        // Schedule hourly reminder if switch is turned on
         scheduleHourlyReminder()
-
-
     }
 
     private fun disableNotifications2() {
-        // Cancel scheduled notifications if switch is turned off
         cancelHourlyReminder()
-
-
     }
 
     private fun createNotificationChannel() {
@@ -173,7 +152,7 @@ class SettingsActivity : AppCompatActivity() {
         val channel = NotificationChannel("progress_reminder", name, importance).apply {
             description = descriptionText
         }
-        // Register the channel with the system
+
         notificationManager.createNotificationChannel(channel)
     }
 
@@ -187,8 +166,8 @@ class SettingsActivity : AppCompatActivity() {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
-        // Set the alarm to trigger every hour
-        val interval = 7200 * 1000L  // 1 minute in milliseconds
+
+        val interval = 7200 * 1000L
         val triggerTime = System.currentTimeMillis() + interval
 
         alarmManager.setRepeating(
@@ -209,7 +188,7 @@ class SettingsActivity : AppCompatActivity() {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
-        // Cancel the alarm
+
         alarmManager.cancel(pendingIntent)
     }
     private fun cancelDailyWrapup() {
@@ -222,7 +201,7 @@ class SettingsActivity : AppCompatActivity() {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
-        // Cancel the alarm
+
         alarmManager.cancel(pendingIntent)
     }
     private fun scheduleDailyWrapUpReminder() {
@@ -230,12 +209,12 @@ class SettingsActivity : AppCompatActivity() {
         val intent = Intent(this, DailyWrapUpReceiver::class.java)
         val pendingIntent = PendingIntent.getBroadcast(
             this,
-            1, // Unique request code for wrap-up notification
+            1,
             intent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
-        // Set the alarm for 8:30 PM
+
         val calendar = Calendar.getInstance().apply {
             timeInMillis = System.currentTimeMillis()
             set(Calendar.HOUR_OF_DAY, 20)
@@ -254,62 +233,60 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun showConfirmationDialog() {
-        // Inflate the custom layout
+
         val dialogView = layoutInflater.inflate(R.layout.custom_dialog, null)
 
-        // Build the AlertDialog
+
         val dialog = AlertDialog.Builder(this, R.style.TransparentDialog)
             .setView(dialogView)
-            .setCancelable(true) // Allows the dialog to be cancelled
+            .setCancelable(true)
             .create()
 
-        // Set up the custom layout components
+
         val cancelButton: Button = dialogView.findViewById(R.id.button_cancel)
         val confirmButton: Button = dialogView.findViewById(R.id.button_confirm)
 
-        // Set click listeners for the buttons
+
         cancelButton.setOnClickListener {
-            dialog.dismiss() // Dismiss the dialog if Cancel is clicked
+            dialog.dismiss()
         }
 
         confirmButton.setOnClickListener {
-            // If "Yes" is clicked, start the new activity
+
             val intent = Intent(this, AppResetVerification::class.java)
             startActivity(intent)
-            dialog.dismiss() // Dismiss the dialog after starting the activity
+            dialog.dismiss()
         }
 
-        // Show the dialog
+
         dialog.show()
     }
 
     private fun showConfirmationDialog2() {
-        // Inflate the custom layout
+
         val dialogView = layoutInflater.inflate(R.layout.custom_dialog_pin_reset, null)
 
-        // Build the AlertDialog
+
         val dialog = AlertDialog.Builder(this, R.style.TransparentDialog)
             .setView(dialogView)
-            .setCancelable(true) // Allows the dialog to be cancelled
+            .setCancelable(true)
             .create()
 
-        // Set up the custom layout components
+
         val cancelButton: Button = dialogView.findViewById(R.id.button_cancel)
         val confirmButton: Button = dialogView.findViewById(R.id.button_confirm)
 
-        // Set click listeners for the buttons
+
         cancelButton.setOnClickListener {
-            dialog.dismiss() // Dismiss the dialog if Cancel is clicked
+            dialog.dismiss()
         }
 
         confirmButton.setOnClickListener {
-            // If "Yes" is clicked, start the new activity
             val intent = Intent(this, PinResetVerification::class.java)
             startActivity(intent)
-            dialog.dismiss() // Dismiss the dialog after starting the activity
+            dialog.dismiss()
         }
 
-        // Show the dialog
         dialog.show()
     }
 }

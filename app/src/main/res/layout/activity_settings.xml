@@ -11,7 +11,6 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-        <!-- Back Button and Title -->
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -39,7 +38,7 @@
                 android:textColor="@android:color/white" />
         </LinearLayout>
 
-        <!-- GENERAL Section -->
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,7 +48,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginBottom="8dp" />
 
-        <!-- Notifications and Review App -->
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -84,7 +83,7 @@
                 android:scaleX="1.5"
                 android:scaleY="1.5"
                 android:padding="6dp"
-                tools:ignore="UseSwitchCompatOrMaterialXml" /><!-- Change the thumb color -->
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         </LinearLayout>
 
@@ -104,7 +103,6 @@
             />
     </LinearLayout>
 
-        <!-- SECURITY Section -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -121,9 +119,6 @@
         android:padding="2dp"
         android:background="@drawable/general_background">
 
-        <!-- Face ID and Reset PIN -->
-
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -137,7 +132,6 @@
             android:id="@+id/reset_pin" />
     </LinearLayout>
 
-        <!-- RESET Section -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -168,7 +162,6 @@
             android:background="?attr/selectableItemBackgroundBorderless"/>
     </LinearLayout>
 
-        <!-- SOCIALS Section -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -260,7 +253,6 @@
 
         </LinearLayout>
 
-        <!-- Version Info -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
