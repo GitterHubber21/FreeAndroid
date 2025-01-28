@@ -1,5 +1,3 @@
-The README and comments in the code were written with the help of AI.
-
 # Free App
 
 ## Overview
@@ -22,7 +20,7 @@ The **Free** app is a powerful yet simple tool designed to help you track and ov
 - Receive daily reminders to help you stay motivated and maintain momentum.
 - End-of-day wrap-ups summarize your progress and encourage continued effort.
 
-### 4. Robust Security
+### 4.Security
 - Protect your data with a secure **PIN system**.
 - Easily reset your PIN if you forget it.
 
@@ -62,12 +60,9 @@ Download the APK via the link: https://github.com/GitterHubber21/FreeAndroid/rel
 
 ---
 
-
-
-
 ## Privacy & Security
 - All data is secured with a PIN system to ensure privacy.
-- Your PIN is resettable via the Settings screen if forgotten.
+- Your PIN is resettable via the Settings screen if you forget it.
 
 ---
 
