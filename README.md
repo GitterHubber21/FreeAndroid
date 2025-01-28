@@ -49,11 +49,17 @@ The **Free** app is a powerful yet simple tool designed to help you track and ov
 ---
 
 ## Screenshots
-![Screenshot_20250109_180401_Free](https://github.com/user-attachments/assets/110a6a69-f0d5-48e0-91bd-3df91dc67e6d)
-![Screenshot_20250109_180444_Free](https://github.com/user-attachments/assets/78e4cf6a-ea90-46a9-b365-43741994fb25)
-![Screenshot_20250109_180412_Free](https://github.com/user-attachments/assets/5b92e7d6-5495-4f48-ab71-e79509460eaa)
-![Screenshot_20250109_180418_Free](https://github.com/user-attachments/assets/00578421-4c1c-4b2d-9cf6-792a46c21fca)
-![Screenshot_20250109_180429_Free](https://github.com/user-attachments/assets/cea8b319-b824-424d-ad1a-38d94d49ef29)
+![Screenshot_20250109_180401_Free](https://github.com/user-attachments/assets/5b11ead0-e2e3-4cf6-913b-b7c7f3b9869f)  
+![Screenshot_20250109_180412_Free](https://github.com/user-attachments/assets/b9f035fa-dbda-4dd9-be4d-38a7aa5827d7)  
+![Screenshot_20250109_180444_Free](https://github.com/user-attachments/assets/a177910d-abd5-4e26-bf38-df1078c35ba6)
+![Screenshot_20250109_180418_Free](https://github.com/user-attachments/assets/b7be075c-b0e2-4aab-988c-88c1f93575a0)  
+![Screenshot_20250109_180429_Free](https://github.com/user-attachments/assets/01377867-669d-4d7f-ad51-4daf610d942c)  
+
+
+
+
+
+
 ---
 ## Installation
 Download the APK via the link: https://github.com/GitterHubber21/FreeAndroid/releases/latest
